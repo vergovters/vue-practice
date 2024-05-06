@@ -1,25 +1,31 @@
 <script lang="ts">
-import { defineComponent , ref, Ref } from 'vue';
+import { defineComponent , reactive, toRefs } from 'vue';
 
       export default defineComponent({
         setup() {
-          const data: Ref<{
+          const data = reactive<{
             book: string,
             page: number
-          }> = ref({
+          }>({
             book: "vue",
             page: 3
           });
 
+          const addPage = () =>  {
+            data.page++;
+          }
+
           return {
-            data: data.value,
+            ...toRefs(data),
+            add: addPage,
           }
         }
       })
 </script>
 
 <template>
-  <h3>{{ data.book }}</h3>
+  <h3>{{ page }}</h3>
+  <button @click="add"></button>
 </template>
 
 <style scoped>
