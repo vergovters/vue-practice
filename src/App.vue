@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent , reactive, toRefs } from 'vue';
+import { defineComponent , reactive, toRefs, computed, watch } from 'vue';
 
       export default defineComponent({
         setup() {
@@ -14,10 +14,17 @@ import { defineComponent , reactive, toRefs } from 'vue';
           const addPage = () =>  {
             data.page++;
           }
+          const computedValue = computed<number>(() => data.page*4)
+
+           watch([() => data.page, computedValue], ([newPage, newComputedValue], [oldPage, oldComputedValue]) => {
+            console.log("Page changed from", oldPage, "to", newPage);
+            console.log("Computed value changed from", oldComputedValue, "to", newComputedValue);
+          });
 
           return {
             ...toRefs(data),
             add: addPage,
+            computedValue,
           }
         }
       })
@@ -25,6 +32,7 @@ import { defineComponent , reactive, toRefs } from 'vue';
 
 <template>
   <h3>{{ page }}</h3>
+   <h3>{{ computedValue }}</h3>
   <button @click="add"></button>
 </template>
 
