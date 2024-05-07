@@ -1,13 +1,13 @@
-<script lang="ts">
-import { defineComponent, inject } from 'vue'
-export default defineComponent({
-        setup() {
-        const page = inject("page")
-        return {
-            page
-        }
-    },
-})
+<script setup lang="ts">
+import { inject } from 'vue'
+
+    interface PageData {
+        page: number;
+    }
+
+    const page = inject<PageData>("page")
+
+
 </script>
 
 <template>
