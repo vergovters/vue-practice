@@ -39,6 +39,9 @@ watch(data, (newData, oldData) => {
   <input type="text" v-model="inputmodel">
   <test-component :page="data.page" @addPage="addPage"/>
   <test-component-two />
+  <RouterLink to="/first">Go to Home</RouterLink>
+  <RouterLink to="/next">Go to Next</RouterLink>
+  <RouterView />
 </template>
 
 <style scoped>
